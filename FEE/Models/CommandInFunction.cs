@@ -7,6 +7,7 @@ using System.Web;
 
 namespace FEE.Models
 {
+    [Table("CommandInFunctions")]
     public class CommandInFunction
     {
         [Key]

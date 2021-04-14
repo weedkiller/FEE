@@ -7,6 +7,7 @@ using System.Web;
 
 namespace FEE.Models
 {
+    [Table("Categories")]
     public class Category
     {
         [Key]

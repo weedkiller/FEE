@@ -8,6 +8,7 @@ using System.Web;
 
 namespace FEE.Models
 {
+    [Table("Posts")]
     public class Post
     {
         [Key]

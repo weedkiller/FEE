@@ -7,6 +7,7 @@ using System.Web;
 
 namespace FEE.Models
 {
+    [Table("Teachers")]
     public class Teacher
     {
         [Key]
