@@ -13,7 +13,7 @@ namespace FEE.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202104171413413_initialDb"; }
+            get { return "202104171459258_initialDb"; }
         }
         
         string IMigrationMetadata.Source

@@ -139,9 +139,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104171413413_initialDb.cs" />
-    <Compile Include="Migrations\202104171413413_initialDb.designer.cs">
-      <DependentUpon>202104171413413_initialDb.cs</DependentUpon>
+    <Compile Include="Migrations\202104171459258_initialDb.cs" />
+    <Compile Include="Migrations\202104171459258_initialDb.designer.cs">
+      <DependentUpon>202104171459258_initialDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -3264,89 +3264,6 @@
     <Content Include="Areas\Admin\template_admin\bower_components\font-awesome\css\font-awesome.min.css" />
     <Content Include="Areas\Admin\template_admin\bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Areas\Admin\template_admin\bower_components\font-awesome\HELP-US-OUT.txt" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\fullcalendar.css" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\fullcalendar.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\fullcalendar.min.css" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\fullcalendar.min.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\fullcalendar.print.css" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\fullcalendar.print.min.css" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\gcal.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\gcal.min.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale-all.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\af.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ar-dz.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ar-kw.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ar-ly.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ar-ma.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ar-sa.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ar-tn.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ar.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\be.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\bg.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\bs.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ca.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\cs.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\da.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\de-at.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\de-ch.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\de.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\el.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\en-au.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\en-ca.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\en-gb.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\en-ie.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\en-nz.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\es-do.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\es-us.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\es.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\et.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\eu.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\fa.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\fi.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\fr-ca.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\fr-ch.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\fr.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\gl.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\he.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\hi.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\hr.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\hu.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\id.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\is.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\it.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ja.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ka.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\kk.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ko.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\lb.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\lt.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\lv.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\mk.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ms-my.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ms.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\nb.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\nl-be.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\nl.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\nn.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\pl.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\pt-br.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\pt.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ro.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\ru.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\sk.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\sl.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\sq.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\sr-cyrl.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\sr.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\sv.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\th.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\tr.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\uk.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\vi.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\zh-cn.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\zh-hk.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\locale\zh-tw.js" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\LICENSE.txt" />
     <Content Include="Areas\Admin\template_admin\bower_components\inputmask\dist\inputmask\bindings\inputmask.binding.js" />
     <Content Include="Areas\Admin\template_admin\bower_components\inputmask\dist\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
     <Content Include="Areas\Admin\template_admin\bower_components\inputmask\dist\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
@@ -6975,11 +6892,6 @@
     <Content Include="Areas\Admin\template_admin\bower_components\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Areas\Admin\template_admin\bower_components\font-awesome\scss\_stacked.scss" />
     <Content Include="Areas\Admin\template_admin\bower_components\font-awesome\scss\_variables.scss" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\.bower.json" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\bower.json" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\CHANGELOG.md" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\CONTRIBUTING.md" />
-    <Content Include="Areas\Admin\template_admin\bower_components\fullcalendar\README.md" />
     <Content Include="Areas\Admin\template_admin\bower_components\inputmask\.bower.json" />
     <Content Include="Areas\Admin\template_admin\bower_components\inputmask\bower.json" />
     <Content Include="Areas\Admin\template_admin\bower_components\ion.rangeSlider\.bower.json" />
@@ -7335,16 +7247,15 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202104171413413_initialDb.resx">
-      <DependentUpon>202104171413413_initialDb.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Areas\Admin\template_admin\bower_components\fullcalendar\dist\fullcalendar.d.ts" />
     <TypeScriptCompile Include="Areas\Admin\template_admin\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202104171459258_initialDb.resx">
+      <DependentUpon>202104171459258_initialDb.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
