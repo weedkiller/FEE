@@ -8,7 +8,7 @@ namespace FEE.Models
 {
     public class FEEDbContext : DbContext
     {
-        public FEEDbContext() : base("FITConnection")
+        public FEEDbContext() : base("FEEConnection")
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
