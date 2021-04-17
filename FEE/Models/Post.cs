@@ -1,4 +1,5 @@
-﻿using FEE.Enums;
+﻿using FEE.Dtos;
+using FEE.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,12 +10,11 @@ using System.Web;
 namespace FEE.Models
 {
     [Table("Posts")]
-    public class Post
+    public class Post : BaseModel
     {
         [Key]
-        [Column(TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string PostId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int PostId { get; set; }
         [Column(TypeName = "NVARCHAR")]
         [StringLength(256)]
         [Index(IsUnique = true)]
@@ -33,6 +33,6 @@ namespace FEE.Models
         public string Img { get; set; }
         public PostStatus Status { get; set; }
         public string MoreImgs { get; set; }
-        public string FacultyId { get; set; }
+        public string DepartmentId { get; set; }
     }
 }

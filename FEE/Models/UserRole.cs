@@ -9,5 +9,6 @@ namespace FEE.Models
     [Table("UserRoles")]
     public class UserRole
     {
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FEE.Dtos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,17 +9,16 @@ using System.Web;
 namespace FEE.Models
 {
     [Table("Slides")]
-    public class Slide
+    public class Slide : BaseModel
     {
         [Key]
-        [Column(TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string SlideId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int SlideId { get; set; }
         public string Name { get; set; }
         public string Img { get; set; }
         public string Url { get; set; }
         public int? DisplayOrder { get; set; }
         public bool Status { get; set; }
-        public string FacultyId { get; set; }
+        public string DepartmentId { get; set; }
     }
 }

@@ -11,8 +11,8 @@ namespace FEE.Models
     public class Department
     {
         [Key]
-        [StringLength(128)]
-        public string DepartmentId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int DepartmentId { get; set; }
 
         public string Name { get; set; }
     }

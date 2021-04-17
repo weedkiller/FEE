@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FEE.Dtos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,12 +9,11 @@ using System.Web;
 namespace FEE.Models
 {
     [Table("Categories")]
-    public class Category
+    public class Category : BaseModel
     {
         [Key]
-        [Column(TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string CategoryId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CategoryId { get; set; }
         [Column(TypeName = "NVARCHAR")]
         [StringLength(256)]
         [Index(IsUnique = true)]

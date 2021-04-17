@@ -11,9 +11,8 @@ namespace FEE.Models
     public class Teacher
     {
         [Key]
-        [Column(TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string TecherId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TecherId { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Fax { get; set; }
@@ -23,6 +22,6 @@ namespace FEE.Models
         public string WebSite { get; set; }
         public string Content { get; set; }
         public string Img { get; set; }
-        public string FacultyId { get; set; }
+        public string DepartmentId { get; set; }
     }
 }

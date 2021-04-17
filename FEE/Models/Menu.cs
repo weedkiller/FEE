@@ -11,9 +11,8 @@ namespace FEE.Models
     public class Menu
     {
         [Key]
-        [Column(TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string MenuId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int MenuId { get; set; }
         [Column(TypeName = "NVARCHAR")]
         [StringLength(100)]
         [Index(IsUnique = true)]
@@ -21,15 +20,9 @@ namespace FEE.Models
         public string URL { get; set; }
         public int? DisplayOrder { get; set; }
         public bool Status { get; set; }
-        [Column(TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string ParentId { get; set; }
+        public int ParentId { get; set; }
         public string Content { get; set; }
-        [Column(TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string PostId { get; set; }
-        public string FacultyId { get; set; }
-
+        public int PostId { get; set; }
         [Column(TypeName = "DateTime")]
         public DateTime CreateDate { get; set; }
     }

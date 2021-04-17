@@ -8,12 +8,11 @@ using System.Web;
 namespace FEE.Models
 {
     [Table("Comments")]
-    public class Comment
+    public class Comment 
     {
         [Key]
-        [Column(TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string CommentId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CommentId { get; set; }
         public string Content { get; set; }
         [Column(TypeName = "NVARCHAR")]
         [StringLength(128)]
@@ -26,6 +25,5 @@ namespace FEE.Models
         [Column(TypeName = "NVARCHAR")]
         [StringLength(100)]
         public string UserName { get; set; }
-        public string FacultyId { get; set; }
     }
 }
