@@ -7,7 +7,7 @@ using System.Web;
 
 namespace FEE.Models
 {
-    [Table("Permission")]
+    [Table("Permissions")]
     public class Permission
     {
         [Key]
@@ -15,9 +15,8 @@ namespace FEE.Models
         [StringLength(128)]
         public string FunctionId { get; set; }
         [Key]
-        [Column(Order = 2, TypeName = "NVARCHAR")]
-        [StringLength(128)]
-        public string RoleId { get; set; }
+        [Column(Order = 2)]
+        public int RoleId { get; set; }
         [Key]
         [Column(Order = 3, TypeName = "NVARCHAR")]
         [StringLength(128)]

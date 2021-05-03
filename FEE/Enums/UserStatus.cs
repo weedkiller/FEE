@@ -5,8 +5,9 @@ using System.Web;
 
 namespace FEE.Enums
 {
-    public enum PostStatus
+    public enum UserStatus
     {
-
+        Activated,
+        Blocked
     }
 }

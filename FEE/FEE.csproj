@@ -130,18 +130,42 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Constants\CommandCode.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dtos\BaseModel.cs" />
     <Compile Include="Dtos\PageRequest.cs" />
     <Compile Include="Dtos\PageResult.cs" />
     <Compile Include="Enums\PostStatus.cs" />
+    <Compile Include="Enums\UserStatus.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Library\ModelNotification.cs" />
+    <Compile Include="Library\Notification.cs" />
+    <Compile Include="Library\XString.cs" />
     <Compile Include="Migrations\202104171459258_initialDb.cs" />
     <Compile Include="Migrations\202104171459258_initialDb.designer.cs">
       <DependentUpon>202104171459258_initialDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104240232254_update-db.cs" />
+    <Compile Include="Migrations\202104240232254_update-db.designer.cs">
+      <DependentUpon>202104240232254_update-db.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104240239212_change-name-table.cs" />
+    <Compile Include="Migrations\202104240239212_change-name-table.designer.cs">
+      <DependentUpon>202104240239212_change-name-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104240347108_update-db-part-2.cs" />
+    <Compile Include="Migrations\202104240347108_update-db-part-2.designer.cs">
+      <DependentUpon>202104240347108_update-db-part-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105011518116_update-db-part-3.cs" />
+    <Compile Include="Migrations\202105011518116_update-db-part-3.designer.cs">
+      <DependentUpon>202105011518116_update-db-part-3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -158,9 +182,11 @@
     <Compile Include="Models\Slide.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\WebInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\FunctionViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\SideBarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\template_admin\bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css" />
@@ -6589,7 +6615,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layouts.cshtml" />
     <Content Include="Areas\Admin\template_admin\bower_components\bootstrap-colorpicker\.bower.json" />
     <Content Include="Areas\Admin\template_admin\bower_components\bootstrap-colorpicker\.editorconfig" />
     <Content Include="Areas\Admin\template_admin\bower_components\bootstrap-colorpicker\.github\CODE_OF_CONDUCT.md" />
@@ -7200,7 +7226,11 @@
     <Content Include="Areas\Admin\template_admin\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\SideBar.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -7230,8 +7260,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Admin\" />
-    <Folder Include="Constants\" />
+    <Folder Include="Areas\Admin\Views\Menu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -7255,6 +7284,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202104171459258_initialDb.resx">
       <DependentUpon>202104171459258_initialDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104240232254_update-db.resx">
+      <DependentUpon>202104240232254_update-db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104240239212_change-name-table.resx">
+      <DependentUpon>202104240239212_change-name-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104240347108_update-db-part-2.resx">
+      <DependentUpon>202104240347108_update-db-part-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105011518116_update-db-part-3.resx">
+      <DependentUpon>202105011518116_update-db-part-3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

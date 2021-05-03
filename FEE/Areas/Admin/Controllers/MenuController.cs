@@ -6,9 +6,8 @@ using System.Web.Mvc;
 
 namespace FEE.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    public class MenuController : Controller
     {
-        // GET: Admin/Admin
         public ActionResult Index()
         {
             return View();
