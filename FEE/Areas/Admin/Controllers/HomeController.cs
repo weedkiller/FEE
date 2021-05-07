@@ -15,7 +15,11 @@ namespace FEE.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                return View();
+            }
+            return RedirectToAction("Login", "Auth");
         }
 
         [ChildActionOnly]
