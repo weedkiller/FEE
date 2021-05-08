@@ -9,15 +9,15 @@ namespace FEE.Library
 {
     public static class Helper
     {
-        public static IEnumerable<SelectListItem> MenuItem()
+        public static IEnumerable<SelectListItem> ListCategories()
         {
             FEEDbContext db = new FEEDbContext();
-            List<SelectListItem> lstSub = db.Menus
+            List<SelectListItem> lstSub = db.Categories
                 .Select(m =>
                 new SelectListItem
                 {
                     Text = m.Name,
-                    Value = m.MenuId.ToString()
+                    Value = m.CategoryId.ToString()
                 }
                 ).ToList();
             return lstSub;

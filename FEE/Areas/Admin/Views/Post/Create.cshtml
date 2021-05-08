@@ -1,0 +1,71 @@
+﻿@model FEE.ViewModel.PostViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">Thêm danh mục mới</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @using (Html.BeginForm("Create", "Post", FormMethod.Post))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" });
+            <div class="form-group">
+                <label>Tiêu đề:</label>
+                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control", @placeholder = "Nhập tiêu đề bài viết" })
+            </div>
+            <div class="form-group">
+                <label>Mô tả ngắn:</label>
+                @Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "form-control", @placeholder = "Nhập mô tả cho bài viết" })
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Quiz">Danh mục cha:</label><br />
+                        <select class="form-control" name="ParentId">
+                            <option value="0">Chọn danh mục cha</option>
+                            @Html.Raw(ViewBag.HtmlOption)
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Quiz">Loại bài đăng:</label><br />
+                        @Html.DropDownListFor(m => m.CategoryId, Model.ListCategories, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group" style="margin-bottom:0px">
+                        <label for="Quiz" style="padding-right: 10px">Trạng thái</label>
+                        @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea id="editor1" name="editor1" rows="10" cols="80">@Model.Content</textarea>
+            </div>
+            <div class="form-group" style="margin-bottom:0px">
+
+                @Html.CheckBoxFor(model => model.HomeFlag)
+                <label for="Quiz" style="padding-left: 10px">Hiển thị trang chủ</label>
+                <br>
+
+                @Html.CheckBoxFor(model => model.HotFlag)
+                <label for="Quiz" style="padding-left: 10px">Bài viết nổi bật</label>
+                <br>
+
+                @Html.CheckBoxFor(model => model.IsShow)
+                <label for="Quiz" style="padding-left: 10px">Hiển thị</label>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                <a href="/Admin/Menu/Index" class="btn btn-default">Quay lại</a>
+            </div>
+        }
+    </div>
+</div>
+

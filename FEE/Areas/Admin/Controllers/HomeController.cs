@@ -24,6 +24,7 @@ namespace FEE.Areas.Admin.Controllers
 
         [ChildActionOnly]
         [OutputCache(Duration = 3600 * 24)]
+        [Authorize]
         public ActionResult SideBar()
         {
             var roles = db.Roles;

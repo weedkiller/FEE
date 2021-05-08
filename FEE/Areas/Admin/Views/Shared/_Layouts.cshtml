@@ -34,6 +34,7 @@
     <script src="~/Areas/Admin/template_admin/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="~/Areas/Admin/template_admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="~/Areas/Admin/template_admin/dist/js/adminlte.min.js"></script>
+    <script src="~/Areas/Admin/template_admin/bower_components/ckeditor/ckeditor.js"></script>
     <script>
         $(function () {
             $("#example1").DataTable({
@@ -52,6 +53,7 @@
                 "autoWidth": false,
                 "responsive": true
             });
+            CKEDITOR.replace('editor1');
         });
     </script>
 </body>
