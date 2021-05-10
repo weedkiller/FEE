@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202105061642433_update-table-menu-4.designer.cs">
       <DependentUpon>202105061642433_update-table-menu-4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105090232412_update-db-post.cs" />
+    <Compile Include="Migrations\202105090232412_update-db-post.designer.cs">
+      <DependentUpon>202105090232412_update-db-post.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Command.cs" />
@@ -6479,6 +6483,10 @@
     <Content Include="Areas\Admin\template_admin\pages\UI\sliders.html" />
     <Content Include="Areas\Admin\template_admin\pages\UI\timeline.html" />
     <Content Include="Areas\Admin\template_admin\pages\widgets.html" />
+    <Content Include="Areas\Admin\template_admin\plugins\alert\sweetalert2.min.css" />
+    <Content Include="Areas\Admin\template_admin\plugins\alert\sweetalert2.min.js" />
+    <Content Include="Areas\Admin\template_admin\plugins\alert\toastr.min.css" />
+    <Content Include="Areas\Admin\template_admin\plugins\alert\toastr.min.js" />
     <Content Include="Areas\Admin\template_admin\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Areas\Admin\template_admin\plugins\bootstrap-slider\slider.css" />
     <Content Include="Areas\Admin\template_admin\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -7257,6 +7265,7 @@
     <Content Include="Areas\Admin\Views\Menu\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Post\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_MessageAlert.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -7334,6 +7343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105061642433_update-table-menu-4.resx">
       <DependentUpon>202105061642433_update-table-menu-4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105090232412_update-db-post.resx">
+      <DependentUpon>202105090232412_update-db-post.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

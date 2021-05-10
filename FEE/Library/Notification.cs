@@ -9,7 +9,7 @@ namespace FEE.Library
     {
         public static bool has_flash()
         {
-            if (System.Web.HttpContext.Current.Session["Notification"].Equals(""))
+            if (HttpContext.Current.Application["Notification"].Equals(""))
             {
                 return false;
             }
@@ -21,13 +21,13 @@ namespace FEE.Library
             tb.mgs = mgs;
             tb.mgs_type = mgs_type;
 
-            System.Web.HttpContext.Current.Session["Notification"] = tb;
+            HttpContext.Current.Application["Notification"] = tb;
         }
         public static ModelNotification get_flash()
         {
 
-            ModelNotification Notifi = (ModelNotification)System.Web.HttpContext.Current.Session["Notification"];
-            System.Web.HttpContext.Current.Session["Notification"] = "";
+            ModelNotification Notifi = (ModelNotification)HttpContext.Current.Application["Notification"];
+            HttpContext.Current.Application["Notification"] = "";
             return Notifi;
         }
 

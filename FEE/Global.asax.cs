@@ -18,6 +18,7 @@ namespace FEE
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
         }
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)
         {
@@ -38,6 +39,12 @@ namespace FEE
 
             if (Context.User != null)
                 Context.User = new GenericPrincipal(Context.User.Identity, roles);
+        }
+        protected void Session_Start(Object sender, EventArgs e)
+        {
+            Application.Lock();
+            Application["Notification"] = "";
+            Application.UnLock();
         }
     }
 }

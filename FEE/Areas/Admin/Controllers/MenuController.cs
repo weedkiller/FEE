@@ -3,6 +3,7 @@ using FEE.Models;
 using FEE.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,7 +43,7 @@ namespace FEE.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(MenuViewModel viewmodel)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var model = new Menu();
                 model.Name = viewmodel.Name;
@@ -51,8 +52,14 @@ namespace FEE.Areas.Admin.Controllers
                 model.CreateDate = DateTime.Now;
                 _db.Menus.Add(model);
                 _db.SaveChanges();
+                Notification.set_flash("Lưu thành công!", "success");
+                return View();
             }
-            return View();
+            catch(Exception ex)
+            {
+                Notification.set_flash("Thêm thất bại!", "warning");
+                throw ex;
+            }
         }
 
         public string DropdownAdd(int? parentId, string text = "")
@@ -76,6 +83,7 @@ namespace FEE.Areas.Admin.Controllers
             }
             return htmlOption;
         }
+
         [HttpGet]
         public ActionResult Update(int id)
         {
@@ -86,9 +94,9 @@ namespace FEE.Areas.Admin.Controllers
             viewModel.Name = model.Name;
             viewModel.ParentId = model.ParentId;
             viewModel.Status = model.Status;
-
             return View(viewModel);
         }
+
         public string DropdownEdit(int? parentId,int? _pId, string text = "")
         {
 
@@ -117,6 +125,40 @@ namespace FEE.Areas.Admin.Controllers
                 }
             }
             return htmlOption;
+        }
+
+        [HttpPost]
+        public ActionResult Update(MenuViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = _db.Menus.Where(x => x.MenuId == viewModel.Id).SingleOrDefault();
+                model.Name = viewModel.Name;
+                model.ParentId = viewModel.ParentId;
+                model.Status = viewModel.Status;
+                model.UpdateDate = DateTime.Now;
+                _db.SaveChanges();
+                Notification.set_flash("Cập nhật thành công!", "success");
+                return View();
+            }
+            return View(viewModel);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var model = _db.Menus.Where(x => x.MenuId == id).SingleOrDefault();
+            _db.Menus.Remove(model);
+            _db.SaveChanges();
+            Notification.set_flash("Xóa thành công!", "success");
+            return View("Index");
+        }
+        public ActionResult ChangeStatus(int id, bool status)
+        {
+            var model = _db.Menus.Where(x => x.MenuId == id).SingleOrDefault();
+            model.Status = status;
+            _db.SaveChanges();
+            Notification.set_flash("Xóa thành công!", "success");
+            return View("Index");
         }
     }
 }

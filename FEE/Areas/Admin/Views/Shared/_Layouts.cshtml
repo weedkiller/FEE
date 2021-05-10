@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="~/Areas/Admin/template_admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="~/Areas/Admin/template_admin/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="~/Areas/Admin/template_admin/dist/css/skins/skin-blue.min.css">
-
+    <link href="~/Areas/Admin/template_admin/plugins/alert/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/template_admin/plugins/alert/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -34,6 +35,8 @@
     <script src="~/Areas/Admin/template_admin/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="~/Areas/Admin/template_admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="~/Areas/Admin/template_admin/dist/js/adminlte.min.js"></script>
+    <script src="~/Areas/Admin/template_admin/plugins/alert/sweetalert2.min.js"></script>
+    <script src="~/Areas/Admin/template_admin/plugins/alert/toastr.min.js"></script>
     <script src="~/Areas/Admin/template_admin/bower_components/ckeditor/ckeditor.js"></script>
     <script>
         $(function () {
@@ -42,18 +45,48 @@
                 "autoWidth": false,
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
-                }
+                },
+                "columnDefs": [
+                    { "orderable": false, "targets": [2,3, 4] },
+                    { "orderable": true, "targets": [0, 1] }
+                ]
             });
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
-                "ordering": true,
+                "ordering": false,
                 "info": true,
                 "autoWidth": false,
                 "responsive": true
             });
-            CKEDITOR.replace('editor1');
+            
+            if ($('#editor1').length > 0) {
+                CKEDITOR.replace('editor1');
+            }
+            
+        });
+        $(window).on('load', function () {
+            const mgs_type = $('input[name=mgs_type]').val();
+            const msg = $('input[name=mgs]').val();
+            if (mgs_type != '' && msg != '') {
+                toastr.options.timeOut = 5000;
+                switch (mgs_type) {
+                    case 'success':
+                        toastr.info(msg);
+                        break;
+                    case 'warning':
+                        toastr.warning(msg);
+                        break;
+                    case 'danger':
+                        toastr.error(msg);
+                        break;
+                }
+            }
+        });
+        $("#checkAll").click(function () {
+            console.log($('#checkItem'));
+            jQuery('.checkItem').not(this).prop('checked', this.checked);
         });
     </script>
 </body>

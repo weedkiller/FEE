@@ -5,6 +5,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
 }
 
+@Html.Partial("_MessageAlert")
+
 <div class="box box-warning">
     <div class="box-header with-border">
         <h3 class="box-title">Cập nhật danh mục mới</h3>
@@ -13,7 +15,7 @@
     <div class="box-body">
         @using (Html.BeginForm("Update", "Menu", FormMethod.Post))
         {
-            @Html.TextBoxFor(model=>model.Id, htmlAttributes: new { @style = "display:none", @type = "number" })
+            @Html.TextBoxFor(model => model.Id, htmlAttributes: new { @style = "display:none", @type = "number" })
             @Html.ValidationSummary(false, "", new { @class = "text-danger" });
             <div class="form-group">
                 <label>Tên danh mục:</label>

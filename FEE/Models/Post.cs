@@ -1,11 +1,7 @@
 ﻿using FEE.Dtos;
 using FEE.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace FEE.Models
 {
@@ -34,5 +30,6 @@ namespace FEE.Models
         public PostStatus Status { get; set; }
         public string MoreImgs { get; set; }
         public string DepartmentId { get; set; }
+        public bool IsShow { get; set; }
     }
 }
