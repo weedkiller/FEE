@@ -152,7 +152,7 @@ namespace FEE.Areas.Admin.Controllers
                     model.Deleted = false;
                     model.CreateBy = 1;
                     model.HomeFlag = viewModel.HomeFlag;
-                    model.HotFlag = viewModel.HotFlag;
+                    model.HotFlag = false;
                     model.IsShow = viewModel.IsShow;
                     model.UpdateDate = DateTime.Now;
                     model.UpdateBy = 1;
@@ -240,6 +240,37 @@ namespace FEE.Areas.Admin.Controllers
                 CreateDate = x.CreateDate,
             }).OrderBy(x => x.CreateDate).ToList();
             return View(result);
+        }
+
+        public JsonResult ChangeHome(int id, bool status)
+        {
+            var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
+            model.HomeFlag = status;
+            _db.SaveChanges();
+            Notification.set_flash("Cập nhật thành công!", "success");
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ChangeShow(int id, bool status)
+        {
+            var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
+            model.IsShow = status;
+            _db.SaveChanges();
+            Notification.set_flash("Cập nhật thành công!", "success");
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ChangeHot(int id, bool status)
+        {
+            foreach(var item in _db.Posts)
+            {
+                item.HotFlag = false;               
+            }
+            var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
+            model.HotFlag = status;
+            _db.SaveChanges();
+            Notification.set_flash("Cập nhật thành công!", "success");
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

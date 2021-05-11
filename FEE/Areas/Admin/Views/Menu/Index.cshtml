@@ -74,7 +74,7 @@
                                     <td>@item.Name</td>
                                     <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
                                     <td class="text-center">
-                                        <input type="checkbox" onclick="changeStatus(@item.Id,@item.Status)" @(item.Status == true ? "checked" : "") />
+                                        <input type="checkbox" onclick="changeStatus(this)" id="@item.Id" @(item.Status == true ? "checked" : "") />
                                     </td>
                                     <td class="text-center">
                                         <a href="/admin/menu/delete/@item.Id"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
@@ -105,9 +105,9 @@
 </section>
 
 <script>
-    function changeStatus(id, status) {
-        var xid = id;
-        var st = status == false ? false : true;
+    function changeStatus(xthis) {
+        var xid = xthis.id;
+        var st = xthis.checked ? true : false;
         $.ajax({
             type: "POST",
             url: '/Admin/Menu/ChangeStatus',

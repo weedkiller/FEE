@@ -150,7 +150,7 @@ namespace FEE.Areas.Admin.Controllers
             _db.Menus.Remove(model);
             _db.SaveChanges();
             Notification.set_flash("Xóa thành công!", "success");
-            return View("Index");
+            return RedirectToAction("Index");
         }
         public JsonResult ChangeStatus(int id, bool status)
         {
