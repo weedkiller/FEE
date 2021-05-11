@@ -54,7 +54,7 @@
                     <h3 class="box-title">Danh sách bài viết</h3>
                     <a href="/admin/post/create" style="margin-right:10px;position:absolute;right:0" class="btn btn-success"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
                     <button style="margin-right:10px;position:absolute;right:110px" class="btn btn-danger" disabled><i class="fa fa-fw fa-trash-o"></i>Xóa nhiều</button>
-                    <a href="/admin/post/trash" style="margin-right:10px;position:absolute;right:220px" class="btn btn-warning"><i class="fa fa-fw fa-recycle"></i>Đã xóa(0)</a>
+                    <a href="/admin/post/trashindex" style="margin-right:10px;position:absolute;right:220px" class="btn btn-warning"><i class="fa fa-fw fa-recycle"></i>Đã xóa(@ViewBag.TrashCount)</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -82,17 +82,17 @@
                                     <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
                                     <td></td>
                                     <td class="text-center">
-                                        <input type="checkbox" onclick="changeStatus(@item.PostId,@item.HomeFlag)" @(item.HomeFlag == true ? "checked" : "") />
+                                        <input type="checkbox" onclick="changeHome(@item.PostId,@item.HomeFlag)" @(item.HomeFlag == true ? "checked" : "") />
                                     </td>
                                     <td class="text-center">
-                                        <input type="checkbox" onclick="changeStatus(@item.PostId,@item.HotFlag)" @(item.HotFlag == true ? "checked" : "") />
+                                        <input type="checkbox" onclick="changeHot(@item.PostId,@item.HotFlag)" @(item.HotFlag == true ? "checked" : "") />
                                     </td>
                                     <td class="text-center">
                                         <input type="checkbox" onclick="changeStatus(@item.PostId,@item.IsShow)" @(item.IsShow == true ? "checked" : "") />
                                     </td>
                                     <td class="text-center">
-                                        <a href="/admin/menu/delete/@item.PostId"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
-                                        <a href="/admin/menu/update/@item.PostId"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
+                                        <a href="/admin/post/delete/@item.PostId"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
+                                        <a onclick="trash(@item.PostId,@item.Delete)"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
                                     </td>
                                     <td class="text-center"><input type="checkbox" data-id="@item.PostId" class="checkItem" /></td>
                                 </tr>
@@ -120,5 +120,70 @@
     </div>
     <!-- /.row -->
 </section>
-
+<script>
+    function trash(id, deleted) {
+        var xid = id;
+        var st = deleted == false ? false : true;
+        $.ajax({
+            type: "POST",
+            url: '/Admin/Post/Trash',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: xid, status: st }),
+            dataType: "json",
+            success: function (res) {
+                if (res == true) {
+                    location.reload();
+                }
+            }
+        });
+    }
+    function changeShow(id, status) {
+        var xid = id;
+        var st = status == false ? false : true;
+        $.ajax({
+            type: "POST",
+            url: '/Admin/Post/changeshow',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: xid, status: st }),
+            dataType: "json",
+            success: function (res) {
+                if (res == true) {
+                    location.reload();
+                }
+            }
+        });
+    }
+    function changeHome(id, status) {
+        var xid = id;
+        var st = status == false ? false : true;
+        $.ajax({
+            type: "POST",
+            url: '/Admin/Post/changehome',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: xid, status: st }),
+            dataType: "json",
+            success: function (res) {
+                if (res == true) {
+                    location.reload();
+                }
+            }
+        });
+    }
+    function changeHot(id, status) {
+        var xid = id;
+        var st = status == false ? false : true;
+        $.ajax({
+            type: "POST",
+            url: '/Admin/Post/changehot',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: xid, status: st }),
+            dataType: "json",
+            success: function (res) {
+                if (res == true) {
+                    location.reload();
+                }
+            }
+        });
+    }
+</script>
 

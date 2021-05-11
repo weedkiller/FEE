@@ -40,5 +40,5 @@ CKEDITOR.editorConfig = function( config ) {
 	config.filebrowserUploadUrl = '/Areas/Admin/template_admin/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files',
 	config.filebrowserWindowWidth = '1000',
 	config.filebrowserWindowHeight = '700',
-	config.htmlEncodeOutput = true;
+	config.htmlEncodeOutput = false;
 };

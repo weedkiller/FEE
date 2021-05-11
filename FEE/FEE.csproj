@@ -194,6 +194,14 @@
     <Compile Include="Migrations\202105090232412_update-db-post.designer.cs">
       <DependentUpon>202105090232412_update-db-post.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105111443203_update-table-post.cs" />
+    <Compile Include="Migrations\202105111443203_update-table-post.designer.cs">
+      <DependentUpon>202105111443203_update-table-post.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105111529111_update-table-post-part-2.cs" />
+    <Compile Include="Migrations\202105111529111_update-table-post-part-2.designer.cs">
+      <DependentUpon>202105111529111_update-table-post-part-2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Command.cs" />
@@ -7907,6 +7915,7 @@
     <Content Include="Areas\Admin\template_admin\bower_components\ckeditor\skins\kama\readme.md" />
     <Content Include="Areas\Admin\template_admin\bower_components\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Areas\Admin\template_admin\bower_components\ckeditor\skins\moono\readme.md" />
+    <Content Include="Areas\Admin\Views\Post\Update.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -7996,6 +8005,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105090232412_update-db-post.resx">
       <DependentUpon>202105090232412_update-db-post.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105111443203_update-table-post.resx">
+      <DependentUpon>202105111443203_update-table-post.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105111529111_update-table-post-part-2.resx">
+      <DependentUpon>202105111529111_update-table-post-part-2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
