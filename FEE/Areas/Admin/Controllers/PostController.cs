@@ -18,7 +18,7 @@ namespace FEE.Areas.Admin.Controllers
             htmlOption = this.DropdownAdd(0);
             ViewBag.htmlOption = htmlOption;
         }
-        // GET: Admin/Post
+
         public ActionResult Index()
         {
             return View();
@@ -44,6 +44,7 @@ namespace FEE.Areas.Admin.Controllers
             }
             return htmlOption;
         }
+        [HttpGet]
         public ActionResult Create()
         {
             var model = new PostViewModel()
@@ -51,6 +52,38 @@ namespace FEE.Areas.Admin.Controllers
                 ListCategories = Helper.ListCategories().ToList()
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(PostViewModel viewModel)
+        {
+            try
+            {
+                var model = new Post();
+                model.Name = viewModel.Name;
+                model.CategoryId = viewModel.CategoryId;
+                model.Status = viewModel.Status;
+                model.MenuId = viewModel.MenuId;
+                model.Description = viewModel.Description;
+                model.Content = viewModel.Content;
+                model.Deleted = false;
+                model.CreateBy = 1;
+                model.CreateDate = DateTime.Now;
+                model.DepartmentId = "";
+                model.Alias = XString.ToAscii(model.Name);
+                model.Img = viewModel.Img;
+                model.MoreImgs = viewModel.MoreImgs;
+                _db.Posts.Add(model);
+                _db.SaveChanges();
+                Notification.set_flash("Lưu thành công!", "success");
+                viewModel.ListCategories = Helper.ListCategories().ToList();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Notification.set_flash("Thêm thất bại!", "warning");
+                throw ex;
+            }
         }
     }
 }

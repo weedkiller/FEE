@@ -35,9 +35,9 @@
     <script src="~/Areas/Admin/template_admin/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="~/Areas/Admin/template_admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="~/Areas/Admin/template_admin/dist/js/adminlte.min.js"></script>
+    <script src="~/Areas/Admin/template_admin/ckfinder/ckfinder.js"></script>
     <script src="~/Areas/Admin/template_admin/plugins/alert/sweetalert2.min.js"></script>
     <script src="~/Areas/Admin/template_admin/plugins/alert/toastr.min.js"></script>
-    <script src="~/Areas/Admin/template_admin/bower_components/ckeditor/ckeditor.js"></script>
     <script>
         $(function () {
             $("#example1").DataTable({
@@ -47,7 +47,7 @@
                     url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
                 },
                 "columnDefs": [
-                    { "orderable": false, "targets": [2,3, 4] },
+                    { "orderable": false, "targets": [2, 3, 4] },
                     { "orderable": true, "targets": [0, 1] }
                 ]
             });
@@ -60,11 +60,9 @@
                 "autoWidth": false,
                 "responsive": true
             });
-            
-            if ($('#editor1').length > 0) {
-                CKEDITOR.replace('editor1');
-            }
-            
+
+
+
         });
         $(window).on('load', function () {
             const mgs_type = $('input[name=mgs_type]').val();

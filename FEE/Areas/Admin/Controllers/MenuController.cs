@@ -152,13 +152,17 @@ namespace FEE.Areas.Admin.Controllers
             Notification.set_flash("Xóa thành công!", "success");
             return View("Index");
         }
-        public ActionResult ChangeStatus(int id, bool status)
+        public JsonResult ChangeStatus(int id, bool status)
         {
             var model = _db.Menus.Where(x => x.MenuId == id).SingleOrDefault();
             model.Status = status;
             _db.SaveChanges();
-            Notification.set_flash("Xóa thành công!", "success");
-            return View("Index");
+            Notification.set_flash("Cập nhật thành công!", "success");
+            return Json(true,JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DeleteMulti(List<int> id)
+        {
+            return View();
         }
     }
 }

@@ -5,9 +5,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
 }
 
+@Html.Partial("_MessageAlert")
+<script src="~/Areas/Admin/template_admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Areas/Admin/template_admin/bower_components/ckeditor/ckeditor.js"></script>
 <div class="box box-warning">
     <div class="box-header with-border">
-        <h3 class="box-title">Thêm danh mục mới</h3>
+        <h3 class="box-title">Thêm bài viết mới</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -25,28 +28,45 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="Quiz">Danh mục cha:</label><br />
-                        <select class="form-control" name="ParentId">
-                            <option value="0">Chọn danh mục cha</option>
+                        <label for="Quiz">Danh mục bài viết:</label><br />
+                        <select class="form-control" name="MenuId">
+                            <option value="0">Chọn danh mục</option>
                             @Html.Raw(ViewBag.HtmlOption)
                         </select>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="Quiz">Loại bài đăng:</label><br />
+                        <label>Loại bài đăng:</label><br />
                         @Html.DropDownListFor(m => m.CategoryId, Model.ListCategories, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group" style="margin-bottom:0px">
-                        <label for="Quiz" style="padding-right: 10px">Trạng thái</label>
+                        <label style="padding-right: 10px">Trạng thái</label>
                         @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <textarea id="editor1" name="editor1" rows="10" cols="80">@Model.Content</textarea>
+                <label>Hình ảnh đại diện:</label>
+                <button type="button" class="btn btn-xs btn-default" style="margin-top:2px;margin-left:0px" onclick="chooseImage()">Chọn ảnh</button>
+                @Html.TextBoxFor(model => model.Img, htmlAttributes: new { @style = "display:none"})
+            </div>
+            <div class="form-group">
+                <img class="img-responsive" style="max-width:60%;text-align:center" id="Img2" src="~/Areas/Admin/template_admin/dist/img/no-image-available.jpg" alt="Ảnh đại diện" />
+            </div>
+            <div class="form-group">
+                <label>Tiêu đề:</label>
+                @Html.TextAreaFor(model => model.Content, new { @class = "form-control", @required = "true", @id = "editor1" })
+                <script>
+                    if ($('#editor1').length > 0) {
+                        var editor = CKEDITOR.replace('editor1', {
+                            languague: 'vi'
+                        });
+                        
+                    }
+                </script>
             </div>
             <div class="form-group" style="margin-bottom:0px">
 
@@ -68,4 +88,28 @@
         }
     </div>
 </div>
+<script>
+    function chooseImage() {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fileUrl) {
+            $('#Img').attr('value', fileUrl);
+            $('#Img2').attr('src', fileUrl);
+        }
+        finder.popup();
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#avtpreview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#Img2").change(function () {
+        readURL(this);
+    });
+</script>

@@ -81,6 +81,19 @@
 
 <script>
     function changeStatus(id, status) {
-
+        var xid = id;
+        var st = status == false ? false : true;
+        $.ajax({
+            type: "POST",
+            url: '/Admin/Menu/ChangeStatus',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ id: xid, status: st }),
+            dataType: "json",
+            success: function (res) {
+                if (res == true) {
+                    location.reload();
+                }
+            }
+        });
     }
 </script>
