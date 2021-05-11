@@ -39,31 +39,6 @@
     <script src="~/Areas/Admin/template_admin/plugins/alert/sweetalert2.min.js"></script>
     <script src="~/Areas/Admin/template_admin/plugins/alert/toastr.min.js"></script>
     <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
-                },
-                "columnDefs": [
-                    { "orderable": false, "targets": [2, 3, 4] },
-                    { "orderable": true, "targets": [0, 1] }
-                ]
-            });
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": false,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
-            });
-
-
-
-        });
         $(window).on('load', function () {
             const mgs_type = $('input[name=mgs_type]').val();
             const msg = $('input[name=mgs]').val();

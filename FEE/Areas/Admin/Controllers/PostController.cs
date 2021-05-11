@@ -21,7 +21,18 @@ namespace FEE.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var result = _db.Posts.Select(x => new PostViewModel()
+            {
+                PostId = x.PostId,
+                Name = x.Name,
+                Img = x.Img,
+                HomeFlag = x.HomeFlag,
+                HotFlag = x.HotFlag,
+                IsShow = x.IsShow,
+                Status = x.Status,
+                CreateDate = x.CreateDate,
+            });
+            return View(result);
         }
         public string DropdownAdd(int? parentId, string text = "")
         {
@@ -76,8 +87,9 @@ namespace FEE.Areas.Admin.Controllers
                 _db.Posts.Add(model);
                 _db.SaveChanges();
                 Notification.set_flash("Lưu thành công!", "success");
+                viewModel = null;
                 viewModel.ListCategories = Helper.ListCategories().ToList();
-                return View();
+                return View(viewModel);
             }
             catch (Exception ex)
             {

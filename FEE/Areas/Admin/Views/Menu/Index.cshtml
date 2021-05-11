@@ -5,6 +5,31 @@
 }
 
 @Html.Partial("_MessageAlert")
+<script src="~/Areas/Admin/template_admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
+            },
+            "columnDefs": [
+                { "orderable": false, "targets": [2, 3, 4] },
+                { "orderable": true, "targets": [0, 1] }
+            ]
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": false,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        });
+    });
+</script>
 
 <section class="content-header">
     <h1>
@@ -36,8 +61,8 @@
 
                                 <th>Tên danh mục</th>
                                 <th style="width:10%">Ngày tạo</th>
-                                <th style="width:10%">Trạng thái</th>
-                                <th style="width:10%">Thao tác</th>
+                                <th style="width:8%">Trạng thái</th>
+                                <th style="width:7%">Thao tác</th>
                                 <th style="width:5%" class="text-center"><input type="checkbox" id="checkAll" /></th>
                             </tr>
                         </thead>
