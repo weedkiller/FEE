@@ -14,11 +14,8 @@ namespace FEE.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SlideId { get; set; }
-        public string Name { get; set; }
         public string Img { get; set; }
         public string Url { get; set; }
-        public int? DisplayOrder { get; set; }
         public bool Status { get; set; }
-        public string DepartmentId { get; set; }
     }
 }

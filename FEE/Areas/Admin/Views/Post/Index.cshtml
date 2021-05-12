@@ -92,7 +92,7 @@
                                         <input type="checkbox" onclick="changeShow(this)" id="@item.PostId" @(item.IsShow == true ? "checked" : "") />
                                     </td>
                                     <td class="text-center">
-                                        <a onclick="trash(@item.PostId,@item.Delete)"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
+                                        <a onclick="trash(this)" id="@item.PostId"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
                                         <a href="/admin/post/update/@item.PostId"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
                                     </td>
                                     <td class="text-center"><input type="checkbox" data-id="@item.PostId" class="checkItem" /></td>
@@ -124,7 +124,7 @@
 <script>
     function trash(xthis) {
         var xid = xthis.id;
-        var st = xthis.checked ? true : false;
+        var st = true;
         $.ajax({
             type: "POST",
             url: '/Admin/Post/Trash',

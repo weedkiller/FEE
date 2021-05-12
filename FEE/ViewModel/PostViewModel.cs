@@ -35,6 +35,7 @@ namespace FEE.ViewModel
         public string MoreImgs { get; set; }
         public int DepartmentId { get; set; }
         public DateTime CreateDate { get; set; }
+        public DateTime UpdateDate { get; set; }
         public List<SelectListItem> ListCategories { get; set; }
     }
 }

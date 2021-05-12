@@ -29,8 +29,8 @@ namespace FEE.Areas.Admin.Controllers
                 Name = x.Name,
                 Status = x.Status,
                 CreatedDate = x.CreateDate
-
-            }).ToList();
+                
+            }).ToList().OrderBy(y => y.DisplayOrder).ToList();
             return View(result);
         }
 
@@ -45,14 +45,26 @@ namespace FEE.Areas.Admin.Controllers
         {
             try
             {
-                var model = new Menu();
-                model.Name = viewmodel.Name;
-                model.ParentId = viewmodel.ParentId;
-                model.Status = viewmodel.Status;
-                model.CreateDate = DateTime.Now;
-                _db.Menus.Add(model);
-                _db.SaveChanges();
-                Notification.set_flash("Lưu thành công!", "success");
+                if (ModelState.IsValid)
+                {
+                    var model = new Menu();
+                    model.Name = viewmodel.Name;
+                    model.ParentId = viewmodel.ParentId;
+                    model.Status = viewmodel.Status;
+                    model.CreateDate = DateTime.Now;
+                    model.DisplayOrder = viewmodel.DisplayOrder;
+                    _db.Menus.Add(model);
+                    _db.SaveChanges();
+                    Notification.set_flash("Lưu thành công!", "success");
+                    ModelState.Clear();
+                }
+                else
+                {
+                    Notification.set_flash("Nhập đầy đủ thông tin!", "warning");
+                }
+                htmlOption = "";
+                htmlOption = this.DropdownAdd(0);
+                ViewBag.htmlOption = htmlOption;
                 return View();
             }
             catch(Exception ex)
@@ -64,16 +76,16 @@ namespace FEE.Areas.Admin.Controllers
 
         public string DropdownAdd(int? parentId, string text = "")
         {
-            
+
             var list = _db.Menus.Select(x => new MenuViewModel()
             {
                 Id = x.MenuId,
                 Name = x.Name,
-                ParentId = x.ParentId
+                ParentId = x.ParentId,
 
-            }).ToList();
+            }).ToList().OrderBy(y => y.DisplayOrder).ToList();
 
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 if(item.ParentId == parentId)
                 {
@@ -94,6 +106,7 @@ namespace FEE.Areas.Admin.Controllers
             viewModel.Name = model.Name;
             viewModel.ParentId = model.ParentId;
             viewModel.Status = model.Status;
+            viewModel.DisplayOrder = model.DisplayOrder;
             return View(viewModel);
         }
 
@@ -106,7 +119,7 @@ namespace FEE.Areas.Admin.Controllers
                 Name = x.Name,
                 ParentId = x.ParentId
 
-            }).ToList();
+            }).ToList().OrderBy(y => y.DisplayOrder).ToList();
 
             foreach (var item in list)
             {
@@ -137,8 +150,12 @@ namespace FEE.Areas.Admin.Controllers
                 model.ParentId = viewModel.ParentId;
                 model.Status = viewModel.Status;
                 model.UpdateDate = DateTime.Now;
+                model.DisplayOrder = viewModel.DisplayOrder;
                 _db.SaveChanges();
                 Notification.set_flash("Cập nhật thành công!", "success");
+                htmlOption = "";
+                htmlOption = this.DropdownEdit(0, model.ParentId);                
+                ViewBag.htmlOption = htmlOption;
                 return View();
             }
             return View(viewModel);
@@ -159,10 +176,6 @@ namespace FEE.Areas.Admin.Controllers
             _db.SaveChanges();
             Notification.set_flash("Cập nhật thành công!", "success");
             return Json(true,JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult DeleteMulti(List<int> id)
-        {
-            return View();
         }
     }
 }

@@ -15,8 +15,8 @@
                 url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
             },
             "columnDefs": [
-                { "orderable": false, "targets": [1, 3, 4, 5, 6, 7, 8] },
-                { "orderable": true, "targets": [0, 2] }
+                { "orderable": false, "targets": [1, 4, 5, 6] },
+                { "orderable": true, "targets": [0, 2, 3] }
             ]
         });
         $('#example2').DataTable({
@@ -42,7 +42,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="/Admin/Home"><i class="fa fa-dashboard"></i> Trang chính</a></li>
-        <li class="active">Bài viết</li>
+        <li class="active">Bài viết đã xóa</li>
     </ol>
 </section>
 
@@ -53,10 +53,10 @@
 
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Danh sách bài viết</h3>
+                    <h3 class="box-title">Danh sách bài viết đã xóa</h3>
                     <a href="/admin/post/create" style="margin-right:10px;position:absolute;right:0" class="btn btn-success"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
                     <button style="margin-right:10px;position:absolute;right:110px" class="btn btn-danger" disabled><i class="fa fa-fw fa-trash-o"></i>Xóa nhiều</button>
-                    <a href="/admin/post/trashindex" style="margin-right:10px;position:absolute;right:220px" class="btn btn-warning"><i class="fa fa-fw fa-recycle"></i>Đã xóa(@ViewBag.TrashCount)</a>
+                    <a href="/admin/post/index" style="margin-right:10px;position:absolute;right:220px" class="btn btn-warning"><i class="fa fa-fw fa-recycle"></i>Danh sách</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -67,8 +67,7 @@
                                 <th style="width:15%">Hình ảnh</th>
                                 <th style="width:10%">Ngày tạo</th>
                                 <th style="width:10%">Ngày xóa</th>
-                                <th style="width:8%">Trang chủ</th>
-                                <th style="width:6%">Người xóa</th>
+                                <th style="width:10%">Người xóa</th>
                                 <th style="width:7%">Thao tác</th>
                                 <th style="width:5%" class="text-center"><input type="checkbox" /></th>
                             </tr>
@@ -81,19 +80,11 @@
                                     <td>@item.Name</td>
                                     <td><img src="@item.Img" style="width:120px;height:100px" alt="No Image" /></td>
                                     <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.UpdateDate.ToString("dd/MM/yyyy")</td>
                                     <td></td>
                                     <td class="text-center">
-                                        <input type="checkbox" onclick="changeHome(this)" id="@item.PostId" @(item.HomeFlag == true ? "checked" : "") />
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="radio" name="hotflag" onclick="changeHot(this)" id="@item.PostId" @(item.HotFlag == true ? "checked" : "") />
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="checkbox" onclick="changeShow(this)" id="@item.PostId" @(item.IsShow == true ? "checked" : "") />
-                                    </td>
-                                    <td class="text-center">
-                                        <a onclick="trash(@item.PostId,@item.Delete)"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
-                                        <a href="/admin/post/update/@item.PostId"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
+                                        <a onclick="deleted(@item.PostId,@item.Delete)"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
+                                        <a onclick="retrash(this)" id="@item.PostId"><i style="color:green" class="fa fa-fw fa-recycle"></i></a>
                                     </td>
                                     <td class="text-center"><input type="checkbox" data-id="@item.PostId" class="checkItem" /></td>
                                 </tr>
@@ -105,10 +96,9 @@
                                 <th>Hình ảnh</th>
                                 <th>Ngày tạo</th>
                                 <th>Ngày xóa</th>
-                                <th>Trang chủ</th>
                                 <th>Người xóa</th>
                                 <th>Thao tác</th>
-                                <th> class="text-center"><input type="checkbox" /></th>
+                                <th class="text-center"><input type="checkbox" /></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -121,60 +111,12 @@
     <!-- /.row -->
 </section>
 <script>
-    function trash(xthis) {
+    function retrash(xthis) {
         var xid = xthis.id;
-        var st = xthis.checked ? true : false;
+        var st = false;
         $.ajax({
             type: "POST",
-            url: '/Admin/Post/Trash',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ id: xid, status: st }),
-            dataType: "json",
-            success: function (res) {
-                if (res == true) {
-                    location.reload();
-                }
-            }
-        });
-    }
-    function changeShow(xthis) {
-        var xid = xthis.id;
-        var st = xthis.checked ? true : false;
-        $.ajax({
-            type: "POST",
-            url: '/Admin/Post/changeshow',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ id: xid, status: st }),
-            dataType: "json",
-            success: function (res) {
-                if (res == true) {
-                    location.reload();
-                }
-            }
-        });
-    }
-    function changeHome(xthis) {
-        var xid = xthis.id;
-        var st = xthis.checked ? true : false;
-        $.ajax({
-            type: "POST",
-            url: '/Admin/Post/changehome',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ id: xid, status: st }),
-            dataType: "json",
-            success: function (res) {
-                if (res == true) {
-                    location.reload();
-                }
-            }
-        });
-    }
-    function changeHot(xthis) {
-        var xid = xthis.id;
-        var st = xthis.checked ? true : false;
-        $.ajax({
-            type: "POST",
-            url: '/Admin/Post/changehot',
+            url: '/Admin/Post/ReTrash',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ id: xid, status: st }),
             dataType: "json",

@@ -16,12 +16,11 @@ namespace FEE.Models
         [Column(TypeName = "NVARCHAR")]
         [StringLength(100)]
         public string Name { get; set; }
-        //public string URL { get; set; }
-        //public int? DisplayOrder { get; set; }
+        public string URL { get; set; }
+        public int? DisplayOrder { get; set; }
         public bool Status { get; set; }
         public int? ParentId { get; set; }
-        //public string Content { get; set; }
-        //public int? PostId { get; set; }
+        public int? PostId { get; set; }
         [Column(TypeName = "DateTime")]
         public DateTime CreateDate { get; set; }
         [Column(TypeName = "DateTime")]

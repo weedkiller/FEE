@@ -1,0 +1,54 @@
+﻿@model List<FEE.ViewModel.MenuViewModel>
+
+<div class="header-nav">
+    <div class="header-nav-wrapper navbar-scrolltofixed bg-white">
+        <div class="container">
+            <nav id="menuzord" class="menuzord blue">
+                <ul class="menuzord-menu">
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <li>
+                                @if (item.URL == "Home/Index")
+                                {
+                                    <a href="@item.URL" style="font-size:13px">@item.Name</a>
+                                }
+                                else
+                                {
+                                    <a href="@item.URL@item.Id" style="font-size:13px">@item.Name</a>
+                                }
+                                @if (item.SubItem.Count() != 0)
+                                {
+                                    <ul class="dropdown">
+                                        @{
+                                            foreach (var sub in item.SubItem)
+                                            {
+                                                <li>
+                                                    <a href="@sub.URL@sub.Id" style="font-size:13px">@sub.Name</a>
+                                                    @if (sub.SubItem.Count() != 0)
+                                                    {
+                                                        <ul class="dropdown">
+                                                            @{
+                                                                foreach (var subsm in sub.SubItem)
+                                                                {
+                                                                    <li><a href="@subsm.URL@subsm.Id" style="font-size:13px">@subsm.Name</a></li>
+                                                                }
+                                                            }
+                                                        </ul>
+                                                    }
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    }
+                </ul>
+                <div class="pull-right sm-pull-none mb-sm-15">
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+

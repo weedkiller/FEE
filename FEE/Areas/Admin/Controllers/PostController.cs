@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace FEE.Areas.Admin.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         private FEEDbContext _db = new FEEDbContext();
@@ -100,6 +101,9 @@ namespace FEE.Areas.Admin.Controllers
                 {
                     Notification.set_flash("Nhập đầy đủ thông tin!", "warning");
                 }
+                htmlOption = "";
+                htmlOption = this.DropdownAdd(0);
+                ViewBag.htmlOption = htmlOption;
                 viewModel = new PostViewModel();
                 viewModel.ListCategories = Helper.ListCategories().ToList();
                 return View(viewModel);
@@ -162,7 +166,6 @@ namespace FEE.Areas.Admin.Controllers
                     model.MoreImgs = viewModel.MoreImgs;
                     _db.SaveChanges();
                     Notification.set_flash("Lưu thành công!", "success");
-                    ModelState.Clear();
                 }
                 else
                 {
@@ -170,6 +173,10 @@ namespace FEE.Areas.Admin.Controllers
                 }
                 viewModel = new PostViewModel();
                 viewModel.ListCategories = Helper.ListCategories().ToList();
+                ViewBag.Img = viewModel.Img;
+                htmlOption = "";
+                htmlOption = DropdownEdit(0, viewModel.MenuId);
+                ViewBag.UpdateOption = htmlOption;
                 return View(viewModel);
             }
             catch
@@ -221,8 +228,21 @@ namespace FEE.Areas.Admin.Controllers
         {
             var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
             model.Deleted = status;
+            model.UpdateDate = DateTime.Now;
+            model.UpdateBy = 1;
             _db.SaveChanges();
             Notification.set_flash("Xóa thành công!", "success");
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ReTrash(int id, bool status)
+        {
+            var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
+            model.Deleted = status;
+            model.UpdateDate = DateTime.Now;
+            model.UpdateBy = 1;
+            _db.SaveChanges();
+            Notification.set_flash("Thay đổi thành công!", "success");
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
@@ -237,7 +257,7 @@ namespace FEE.Areas.Admin.Controllers
                 HotFlag = x.HotFlag,
                 IsShow = x.IsShow,
                 Status = x.Status,
-                CreateDate = x.CreateDate,
+                CreateDate = x.CreateDate
             }).OrderBy(x => x.CreateDate).ToList();
             return View(result);
         }
