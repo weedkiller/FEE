@@ -16,10 +16,14 @@
         @using (Html.BeginForm("Update", "WebInfos", FormMethod.Post))
         {
             @Html.TextBoxFor(model => model.Id, htmlAttributes: new { @style = "display:none", @type = "number" })
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" });
             <div class="form-group">
-                <label>Logo:</label>
-                @Html.TextBoxFor(model => model.Logo, htmlAttributes: new { @class = "form-control", @placeholder = "Nhập logo" })
+                <label>Hình ảnh Logo:</label>
+                <button type="button" class="btn btn-xs btn-default" style="margin-top:2px;margin-left:0px" onclick="chooseImage()">Chọn ảnh</button>
+                @Html.TextBoxFor(model => model.Logo, htmlAttributes: new { @style = "display:none" })
+                @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <img class="img-responsive" style="max-width:60%;text-align:center" id="Img2" src="@ViewBag.Img" alt="Ảnh đại diện" />
             </div>
             <div class="form-group">
                 <label>Số điện thoại:</label>

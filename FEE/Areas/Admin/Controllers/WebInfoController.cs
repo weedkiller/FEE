@@ -67,13 +67,14 @@ namespace FEE.Areas.Admin.Controllers
             var model = _db.WebInfos.Where(x => x.WebInfoId == id).SingleOrDefault();
 
             var viewModel = new WebInfoViewModel();
-            model.Logo = viewModel.Logo;
-            model.Email = viewModel.Email;
-            model.Phone = viewModel.Phone;
-            model.Address = viewModel.Address;
-            model.Facebook = viewModel.Facebook;
-            model.Youtube = viewModel.Youtube;
-            model.Zalo = viewModel.Zalo;
+            viewModel.Logo = model.Logo;
+            viewModel.Email = model.Email;
+            viewModel.Phone = model.Phone;
+            viewModel.Address = model.Address;
+            viewModel.Facebook = model.Facebook;
+            viewModel.Youtube = model.Youtube;
+            viewModel.Zalo = model.Zalo;
+            ViewBag.Img = viewModel.Logo;
             return View(viewModel);
         }
 
@@ -92,6 +93,7 @@ namespace FEE.Areas.Admin.Controllers
                 model.Zalo = viewModel.Zalo;
                 _db.SaveChanges();
                 Notification.set_flash("Cập nhật thành công!", "success");
+                ViewBag.Img = viewModel.Logo;
                 return View();
             }
             return View(viewModel);

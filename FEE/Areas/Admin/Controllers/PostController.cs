@@ -173,7 +173,7 @@ namespace FEE.Areas.Admin.Controllers
                 }
                 viewModel = new PostViewModel();
                 viewModel.ListCategories = Helper.ListCategories().ToList();
-                ViewBag.Img = viewModel.Img;
+                ViewBag.Img2 = viewModel.Img;
                 htmlOption = "";
                 htmlOption = DropdownEdit(0, viewModel.MenuId);
                 ViewBag.UpdateOption = htmlOption;
@@ -292,6 +292,25 @@ namespace FEE.Areas.Admin.Controllers
             _db.SaveChanges();
             Notification.set_flash("Cập nhật thành công!", "success");
             return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Item(int id)
+        {
+            var model = _db.Posts.Where(x => x.PostId == id).Select(x => new PostViewModel()
+            {
+                PostId = x.PostId,
+                MenuId = x.MenuId,
+                Name = x.Name,
+                Description = x.Description,
+                CategoryId = x.CategoryId.ToString(),
+                Status = x.Status,
+                Img = x.Img,
+                Content = x.Content,
+                HomeFlag = x.HomeFlag,
+                HotFlag = x.HotFlag,
+                IsShow = x.IsShow
+            }).FirstOrDefault();
+            return View(model);
         }
     }
 }

@@ -113,10 +113,10 @@ This file contains the common styles of this theme.
 }
 body {
   line-height: 1.7;
-  color: #777777;
-  font-size: 14px;
+  color: black;
+  font-size: 15px;
   font-family: 'Roboto Slab', serif;
-  font-weight: 500;
+  font-weight: 400;
   background-color: #fff;
   background-attachment: fixed;
 }

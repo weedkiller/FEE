@@ -1,5 +1,6 @@
 ﻿using FEE.Models;
 using FEE.ViewModel;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,11 @@ namespace FEE.Controllers
             }).SingleOrDefault();
             return View(result);
         }
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id,string keyWord, int page = 1, int pageSize = 5)
         {
-            var listItem = _db.Posts.Where(x => x.MenuId == id).Select(x => new PostViewModel()
+            IPagedList<PostViewModel> result = null;
+
+            var listItem = _db.Posts.Select(x => new PostViewModel()
             {
                 Name = x.Name,
                 PostId = x.PostId,
@@ -34,7 +37,19 @@ namespace FEE.Controllers
                 Description = x.Description,
                 CreateDate = x.CreateDate
             }).OrderBy(x => x.CreateDate).ToList();
-            return View(listItem);
+
+            if(id != null)
+            {
+                listItem = listItem.Where(x => x.MenuId == id).ToList();
+            }
+
+            if (!String.IsNullOrEmpty(keyWord))
+            {
+                listItem = listItem.Where(x => x.Name.ToUpper().Contains(keyWord.ToUpper())).ToList();
+            }
+            ViewBag.Count = listItem.Count();
+            result = listItem.ToPagedList(page, pageSize);            
+            return View(result);
         }
         public ActionResult Category()
         {

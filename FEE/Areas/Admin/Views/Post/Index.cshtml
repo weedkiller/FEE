@@ -54,7 +54,6 @@
                 <div class="box-header">
                     <h3 class="box-title">Danh sách bài viết</h3>
                     <a href="/admin/post/create" style="margin-right:10px;position:absolute;right:0" class="btn btn-success"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
-                    <button style="margin-right:10px;position:absolute;right:110px" class="btn btn-danger" disabled><i class="fa fa-fw fa-trash-o"></i>Xóa nhiều</button>
                     <a href="/admin/post/trashindex" style="margin-right:10px;position:absolute;right:220px" class="btn btn-warning"><i class="fa fa-fw fa-recycle"></i>Đã xóa(@ViewBag.TrashCount)</a>
                 </div>
                 <!-- /.box-header -->
@@ -70,7 +69,6 @@
                                 <th style="width:6%">Ghim</th>
                                 <th style="width:6%">Ẩn/Hiện</th>
                                 <th style="width:8%">Thao tác</th>
-                                <th style="width:5%" class="text-center"><input type="checkbox" /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,10 +92,9 @@
                                     <td class="text-center">
                                         <a onclick="deleteConfirm(this)" id="@item.PostId" data-toggle="modal" data-target="#myModal"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
                                         <a href="/admin/post/update/@item.PostId"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
-                                        <a onclick="getDetail(this)" id="@item.PostId" data-toggle="modal" data-target="#myModal1"><i style="color:blue" class="fa fa-fw fa-eye"></i></a>
+                                        <a href="/admin/post/item/@item.PostId"><i style="color:blue" class="fa fa-fw fa-eye"></i></a>
                                         
                                     </td>
-                                    <td class="text-center"><input type="checkbox" data-id="@item.PostId" class="checkItem" /></td>
                                 </tr>
                             }
                         </tbody>
@@ -111,7 +108,6 @@
                                 <th>Ghim</th>
                                 <th>Ẩn/Hiện</th>
                                 <th>Thao tác</th>
-                                <th class="text-center"><input type="checkbox" /></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -142,24 +138,7 @@
 
     </div>
 </div>
-<div class="modal fade" id="myModal1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Xem trước</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
 
-        </div>
-
-    </div>
-</div>
 <script>
     var idx;
     var st;
