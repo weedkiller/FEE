@@ -20,7 +20,6 @@ namespace FEE.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Function> Functions { get; set; }
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Command> Commands { get; set; }
         public DbSet<CommandInFunction> CommandInFunctions { get; set; }
         public DbSet<Role> Roles { get; set; }

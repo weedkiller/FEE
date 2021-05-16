@@ -74,12 +74,13 @@ namespace FEE.Controllers
         {
             try
             {
-                var result = _db.Menus.Select(x => new MenuViewModel()
+                var result = _db.Menus.Where(x=>x.Status == true).Select(x => new MenuViewModel()
                 {
                     Id = x.MenuId,
                     Name = x.Name,
                     ParentId = x.ParentId,
-                    DisplayOrder = x.DisplayOrder
+                    DisplayOrder = x.DisplayOrder,
+                    URL = x.URL
                     
                 }).ToList();
 

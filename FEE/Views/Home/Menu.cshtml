@@ -9,13 +9,13 @@
                         foreach (var item in Model)
                         {
                             <li>
-                                @if (item.URL == "Home/Index")
+                                @if (item.URL == "/Home/Index")
                                 {
-                                    <a href="@item.URL" style="font-size:13px">@item.Name</a>
+                                    <a href="/" style="font-size:13px">@item.Name</a>
                                 }
                                 else
                                 {
-                                    <a href="@item.URL@item.Id" style="font-size:13px">@item.Name</a>
+                                    <a href="/Post/Index/@item.Id" style="font-size:13px">@item.Name</a>
                                 }
                                 @if (item.SubItem.Count() != 0)
                                 {
@@ -24,14 +24,14 @@
                                             foreach (var sub in item.SubItem)
                                             {
                                                 <li>
-                                                    <a href="@sub.URL@sub.Id" style="font-size:13px">@sub.Name</a>
+                                                    <a href="/Post/Index/@sub.Id" style="font-size:13px">@sub.Name</a>
                                                     @if (sub.SubItem.Count() != 0)
                                                     {
                                                         <ul class="dropdown">
                                                             @{
                                                                 foreach (var subsm in sub.SubItem)
                                                                 {
-                                                                    <li><a href="@subsm.URL@subsm.Id" style="font-size:13px">@subsm.Name</a></li>
+                                                                    <li><a href="/Post/Index/@subsm.Id" style="font-size:13px">@subsm.Name</a></li>
                                                                 }
                                                             }
                                                         </ul>

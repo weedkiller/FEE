@@ -28,7 +28,8 @@ namespace FEE.Areas.Admin.Controllers
                 Id = x.MenuId,
                 Name = x.Name,
                 Status = x.Status,
-                CreatedDate = x.CreateDate
+                CreatedDate = x.CreateDate,
+                DisplayOrder = x.DisplayOrder
                 
             }).ToList().OrderBy(y => y.DisplayOrder).ToList();
             return View(result);
@@ -82,7 +83,7 @@ namespace FEE.Areas.Admin.Controllers
                 Id = x.MenuId,
                 Name = x.Name,
                 ParentId = x.ParentId,
-
+                DisplayOrder = x.DisplayOrder
             }).ToList().OrderBy(y => y.DisplayOrder).ToList();
 
             foreach (var item in list)
@@ -117,8 +118,8 @@ namespace FEE.Areas.Admin.Controllers
             {
                 Id = x.MenuId,
                 Name = x.Name,
-                ParentId = x.ParentId
-
+                ParentId = x.ParentId,
+                DisplayOrder = x.DisplayOrder
             }).ToList().OrderBy(y => y.DisplayOrder).ToList();
 
             foreach (var item in list)
@@ -161,14 +162,15 @@ namespace FEE.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id, bool status)
         {
             var model = _db.Menus.Where(x => x.MenuId == id).SingleOrDefault();
-            _db.Menus.Remove(model);
+            model.Status = status;
             _db.SaveChanges();
-            Notification.set_flash("Xóa thành công!", "success");
-            return RedirectToAction("Index");
+            Notification.set_flash("Ẩn thành công!", "success");
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult ChangeStatus(int id, bool status)
         {
             var model = _db.Menus.Where(x => x.MenuId == id).SingleOrDefault();

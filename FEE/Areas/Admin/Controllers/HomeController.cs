@@ -22,9 +22,9 @@ namespace FEE.Areas.Admin.Controllers
             return RedirectToAction("Login", "Auth");
         }
 
-        [ChildActionOnly]
-        [OutputCache(Duration = 3600 * 24)]
         [Authorize]
+        [ChildActionOnly]
+        [OutputCache(Duration = 3600 * 24)]       
         public ActionResult SideBar()
         {
             var roles = db.Roles;

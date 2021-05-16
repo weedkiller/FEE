@@ -88,18 +88,19 @@ namespace FEE.Areas.Admin.Controllers
                 model.UpdateBy = 1;
                 _db.SaveChanges();
                 Notification.set_flash("Cập nhật thành công!", "success");
+                ViewBag.Img = model.Img;
                 return View();
             }
             return View(viewModel);
         }
 
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
             var model = _db.Slides.Where(x => x.SlideId == id).SingleOrDefault();
             _db.Slides.Remove(model);
             _db.SaveChanges();
             Notification.set_flash("Xóa thành công!", "success");
-            return RedirectToAction("Index");
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ChangeStatus(int id, bool status)
         {

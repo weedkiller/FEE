@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FEE.ViewModel.MenuViewModel>
+﻿@model IEnumerable<FEE.ViewModel.WebInfoViewModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
@@ -15,7 +15,7 @@
                 url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json'
             },
             "columnDefs": [
-                { "orderable": false, "targets": [2, 3] },
+                { "orderable": false, "targets": [2, 3, 4] },
                 { "orderable": true, "targets": [0, 1] }
             ]
         });
@@ -34,11 +34,11 @@
 <section class="content-header">
     <h1>
         QUẢN LÝ
-        <small>DANH MỤC</small>
+        <small>THÔNG TIN WEBSITE</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/Admin/Home"><i class="fa fa-dashboard"></i> Trang chính</a></li>
-        <li class="active">Danh mục</li>
+        <li class="active">Website</li>
     </ol>
 </section>
 
@@ -49,44 +49,49 @@
 
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Danh sách danh mục</h3>
-                    <a href="/admin/menu/create" style="margin-right:10px;position:absolute;right:0" class="btn btn-success"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
-                    @*<button href="/admin/menu/create" style="margin-right:10px;position:absolute;right:110px" class="btn btn-danger" disabled><i class="fa fa-fw fa-trash-o"></i>Xóa nhiều</button>*@
+                    <h3 class="box-title">Danh sách thông tin</h3>
+                    <a href="/admin/webinfo/create" style="margin-right:10px;position:absolute;right:0" class="btn btn-success"><i class="fa fa-fw fa-plus"></i>Thêm mới</a>
+                    @*<button href="/admin/webinfo/create" style="margin-right:10px;position:absolute;right:110px" class="btn btn-danger" disabled><i class="fa fa-fw fa-trash-o"></i>Xóa nhiều</button>*@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Tên danh mục</th>
-                                <th style="width:10%">Ngày tạo</th>
-                                <th style="width:8%">Ẩn/Hiện</th>
-                                <th style="width:7%">Thao tác</th>
+
+                                <th>Logo</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Địa chỉ</th>
+                                <th style="width:10%">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.Name</td>
-                                    <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+
+                                    <td><img src="@item.Logo" style="width:120px;height:100px" alt="No Image" /></td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.Address</td>
+
                                     <td class="text-center">
-                                        <input type="checkbox" onclick="changeStatus(this)" id="@item.Id" @(item.Status == true ? "checked" : "") />
+                                        <a onclick="deleteConfirm(this)" id="@item.Id" data-toggle="modal" data-target="#myModal"><i style="color:red" class="fa fa-fw fa-trash"></i></a>
+                                        <a href="/admin/webinfo/update/@item.Id"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
                                     </td>
-                                    <td class="text-center">
-                                        @*<a href="/admin/menu/delete/@item.Id"><i style="color:red" class="fa fa-fw fa-trash"></i></a>*@
-                                        <a href="/admin/menu/update/@item.Id"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
-                                    </td>
-                                    @*<td class="text-center"><input type="checkbox" data-id="@item.Id" class="checkItem" /></td>*@
                                 </tr>
                             }
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Tên danh mục</th>
-                                <th>Ngày tạo</th>
-                                <th>Trạng thái</th>
-                                <th>Thao tác</th>
+
+                                <th>Logo</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Địa chỉ</th>
+                                <th style="width:10%">Thao tác</th>
+
                             </tr>
                         </tfoot>
                     </table>
@@ -98,7 +103,7 @@
     </div>
     <!-- /.row -->
 </section>
-@*<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -116,16 +121,19 @@
         </div>
 
     </div>
-</div>*@
+</div>
 <script>
-    function changeStatus(xthis) {
-        var xid = xthis.id;
-        var st = xthis.checked ? true : false;
+    var idx;
+    var st;
+    var deleteConfirm = function (xthis) {
+        xid = xthis.id;
+    }
+    $('#deleteBtn').click(function () {
         $.ajax({
             type: "POST",
-            url: '/Admin/Menu/changestatus',
+            url: '/Admin/Webinfo/Delete',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ id: xid, status: st }),
+            data: JSON.stringify({ id: xid }),
             dataType: "json",
             success: function (res) {
                 if (res == true) {
@@ -133,5 +141,5 @@
                 }
             }
         });
-    }
+    })
 </script>

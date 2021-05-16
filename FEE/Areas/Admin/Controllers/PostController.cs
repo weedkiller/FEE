@@ -216,14 +216,15 @@ namespace FEE.Areas.Admin.Controllers
             return htmlOption;
         }
 
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
             var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
             _db.Posts.Remove(model);
             _db.SaveChanges();
             Notification.set_flash("Xóa vĩnh viễn!", "success");
-            return View("Index");
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
         public JsonResult Trash(int id, bool status)
         {
             var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();

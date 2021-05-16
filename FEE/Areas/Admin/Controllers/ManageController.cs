@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FEE.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ManageController : Controller
     {
         // GET: Admin/Manage
