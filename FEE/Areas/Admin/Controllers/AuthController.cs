@@ -1,4 +1,6 @@
-﻿using FEE.Enums;
+﻿using FEE.Authorize;
+using FEE.Dtos;
+using FEE.Enums;
 using FEE.Library;
 using FEE.Models;
 using FEE.ViewModel;
@@ -66,9 +68,16 @@ namespace FEE.Areas.Admin.Controllers
                         if (user.Password == XString.ToMD5(model.Password) && user.Status == (int)UserStatus.Activated)
                         {
                             setCookie(user.Username, model.RememberMe, user.RoleId);
-                            Session["UserID"] = user.Id;
-                            Session["Name"] = user.Name;
-                            Session["RoleID"] = user.RoleId;
+                            var userSession = new UserSession();
+                            userSession.Id = user.Id;
+                            userSession.Name = user.Name;
+                            userSession.RoleId = user.RoleId;
+                            userSession.Username = user.Username;
+                            userSession.DepartmentId = user.DepartmentId;
+
+                            Session.Add("USER", userSession);
+                            Session.Add("PERMISSION", AuthPermission.GetProfileService(user.Id));
+
                             if (ReturnUrl != null)
                                 return Redirect(ReturnUrl);
                             return RedirectToAction("Index", "Home");

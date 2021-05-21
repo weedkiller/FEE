@@ -1,4 +1,5 @@
-﻿using FEE.Library;
+﻿using FEE.Authorize;
+using FEE.Library;
 using FEE.Models;
 using FEE.ViewModel;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UTEHY.Model.Constants;
 
 namespace FEE.Areas.Admin.Controllers
 {
@@ -19,7 +21,7 @@ namespace FEE.Areas.Admin.Controllers
             htmlOption = this.DropdownAdd(0);
             ViewBag.htmlOption = htmlOption;
         }
-
+        [ClaimRequirementFilter(Command = CommandCode.VIEW, Function = FunctionCode.CONTENT_POST)]
         public ActionResult Index()
         {
             var result = _db.Posts.Where(x=>x.Deleted == false).Select(x => new PostViewModel()
@@ -58,6 +60,7 @@ namespace FEE.Areas.Admin.Controllers
             return htmlOption;
         }
         [HttpGet]
+        [ClaimRequirementFilter(Command = CommandCode.CREATE,Function = FunctionCode.CONTENT_POST)]
         public ActionResult Create()
         {
             var model = new PostViewModel()
@@ -66,7 +69,6 @@ namespace FEE.Areas.Admin.Controllers
             };
             return View(model);
         }
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create(PostViewModel viewModel)
@@ -114,8 +116,8 @@ namespace FEE.Areas.Admin.Controllers
                 throw;
             }
         }
-
         [HttpGet]
+        [ClaimRequirementFilter(Command = CommandCode.UPDATE, Function = FunctionCode.CONTENT_POST)]
         public ActionResult Update(int id)
         {
             var model = _db.Posts.Where(x => x.PostId == id).Select(x => new PostViewModel()
@@ -137,7 +139,6 @@ namespace FEE.Areas.Admin.Controllers
             ViewBag.UpdateOption = DropdownEdit(0, model.MenuId);
             return View(model);
         }
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Update(PostViewModel viewModel)
@@ -185,7 +186,6 @@ namespace FEE.Areas.Admin.Controllers
                 throw;
             }
         }
-
         public string DropdownEdit(int? parentId, int? _pId, string text = "")
         {
 
@@ -215,7 +215,7 @@ namespace FEE.Areas.Admin.Controllers
             }
             return htmlOption;
         }
-
+        [ClaimRequirementFilter(Command = CommandCode.DELETE, Function = FunctionCode.CONTENT_POST)]
         public JsonResult Delete(int id)
         {
             var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
@@ -235,7 +235,6 @@ namespace FEE.Areas.Admin.Controllers
             Notification.set_flash("Xóa thành công!", "success");
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult ReTrash(int id, bool status)
         {
             var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
@@ -246,7 +245,6 @@ namespace FEE.Areas.Admin.Controllers
             Notification.set_flash("Thay đổi thành công!", "success");
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult TrashIndex()
         {
             var result = _db.Posts.Where(x => x.Deleted == true).Select(x => new PostViewModel()
@@ -262,7 +260,6 @@ namespace FEE.Areas.Admin.Controllers
             }).OrderBy(x => x.CreateDate).ToList();
             return View(result);
         }
-
         public JsonResult ChangeHome(int id, bool status)
         {
             var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
@@ -271,7 +268,6 @@ namespace FEE.Areas.Admin.Controllers
             Notification.set_flash("Cập nhật thành công!", "success");
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult ChangeShow(int id, bool status)
         {
             var model = _db.Posts.Where(x => x.PostId == id).SingleOrDefault();
@@ -280,7 +276,6 @@ namespace FEE.Areas.Admin.Controllers
             Notification.set_flash("Cập nhật thành công!", "success");
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult ChangeHot(int id, bool status)
         {
             foreach(var item in _db.Posts)
@@ -293,7 +288,6 @@ namespace FEE.Areas.Admin.Controllers
             Notification.set_flash("Cập nhật thành công!", "success");
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult Item(int id)
         {
             var model = _db.Posts.Where(x => x.PostId == id).Select(x => new PostViewModel()

@@ -18,5 +18,6 @@ namespace FEE.Models
         [StringLength(256)]
         [Index(IsUnique = true)]
         public string Name { get; set; }
+        public bool Status { get; set; }
     }
 }

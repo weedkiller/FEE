@@ -14,5 +14,6 @@ namespace FEE.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoleId { get; set; }
         public string Name { get; set; }
+        public bool Status { get; set; }
     }
 }

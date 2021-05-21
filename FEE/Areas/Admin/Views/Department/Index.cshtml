@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<FEE.ViewModel.DepartmentViewModel>
-@{ 
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml"; 
-}
+@{ ViewBag.Title = "Index";
+                Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml"; }
 
 @Html.Partial("_MessageAlert")
 <script src="~/Areas/Admin/template_admin/bower_components/jquery/dist/jquery.min.js"></script>
-<script>$(function () {
+<script>
+    $(function () {
         $("#example1").DataTable({
             "responsive": true,
             "autoWidth": false,
@@ -27,7 +26,8 @@
             "autoWidth": false,
             "responsive": true
         });
-    });</script>
+    });
+</script>
 
 <section class="content-header">
     <h1>
@@ -58,20 +58,19 @@
 
                                 <th>Tên phòng ban</th>
 
-                                <th style="width:7%">Thao tác</th>
+                                <th style="width:10%">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
+                <tr>
 
-                                    <td>@item.Name</td>
-                                    <td class="text-center">
-                                        <a href="/admin/department/update/@item.Id"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
-                                    </td>
-                                </tr>
-                             }
+                    <td>@item.Name</td>
+                    <td class="text-center">
+                        <a href="/admin/department/update/@item.Id"><i style="color:green" class="fa fa-fw fa-pencil"></i></a>
+                    </td>
+                </tr>}
                         </tbody>
                         <tfoot>
                             <tr>

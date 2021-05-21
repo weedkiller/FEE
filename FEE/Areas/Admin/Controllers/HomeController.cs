@@ -1,4 +1,4 @@
-﻿using FEE.Constants;
+﻿using FEE.Dtos;
 using FEE.Models;
 using FEE.ViewModel;
 using System;
@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UTEHY.Model.Constants;
 
 namespace FEE.Areas.Admin.Controllers
 {
@@ -28,8 +29,9 @@ namespace FEE.Areas.Admin.Controllers
         public ActionResult SideBar()
         {
             var roles = db.Roles;
-            var user = db.Users.Find(Session["UserID"]);
-            var role = db.Roles.Find(Convert.ToInt32(Session["RoleID"])).Name;
+            var session = (UserSession)Session["USER"];
+            var user = db.Users.Find(session.Id);
+            var role = db.Roles.Find(session.RoleId).Name;
             var query = from f in db.Functions
                         join p in db.Permissions
                             on f.FunctionId equals p.FunctionId

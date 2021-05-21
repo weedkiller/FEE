@@ -1,4 +1,6 @@
-﻿using FEE.Models;
+﻿using FEE.Authorize;
+using FEE.Dtos;
+using FEE.Models;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,8 +29,14 @@ namespace FEE
                 if (Exist)
                 {
                     var user = db.Users.Where(e => e.Username == HttpContext.Current.User.Identity.Name).First();
-                    HttpContext.Current.Session["UserID"] = user.Id;
-                    HttpContext.Current.Session["Name"] = user.Name;
+                    var userSession = new UserSession();
+                    userSession.Id = user.Id;
+                    userSession.Name = user.Name;
+                    userSession.RoleId = user.RoleId;
+                    userSession.Username = user.Username;
+                    userSession.DepartmentId = user.DepartmentId;
+                    HttpContext.Current.Session.Add("USER", userSession);
+                    HttpContext.Current.Session.Add("PERMISSION", AuthPermission.GetProfileService(user.Id));
                 }
             }
             base.OnActionExecuting(filterContext);

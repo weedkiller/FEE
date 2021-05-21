@@ -1,4 +1,5 @@
-﻿using FEE.Library;
+﻿using FEE.Authorize;
+using FEE.Library;
 using FEE.Models;
 using FEE.ViewModel;
 using System;
@@ -7,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UTEHY.Model.Constants;
 
 namespace FEE.Areas.Admin.Controllers
 {
@@ -161,7 +163,6 @@ namespace FEE.Areas.Admin.Controllers
             }
             return View(viewModel);
         }
-
         public JsonResult Delete(int id, bool status)
         {
             var model = _db.Menus.Where(x => x.MenuId == id).SingleOrDefault();
