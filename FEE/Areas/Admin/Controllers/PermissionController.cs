@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using FEE.Library;
 using FEE.Models;
 using FEE.ViewModel;
 using System;
@@ -8,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UTEHY.Model.Constants;
 
 namespace FEE.Areas.Admin.Controllers
 {
@@ -77,7 +79,28 @@ namespace FEE.Areas.Admin.Controllers
                                  FunctionId = p.FunctionId,
                                  RoleId = p.RoleId
                              };
-            return Json(listModels.ToList(),JsonRequestBehavior.AllowGet);
+            var result = listModels.ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SavePermission(int roleId, List<string> listPermissions)
+        {
+            foreach(var item in db.Permissions.Where(x=>x.RoleId == roleId).ToList())
+            {                
+                db.Permissions.Remove(item);
+            }
+            foreach(var item in listPermissions.Distinct())
+            {
+                string[] arrListStr = item.Split('_');
+                var model = new Permission();
+                model.RoleId = roleId;
+                model.CommandId = arrListStr[arrListStr.Length-1];
+                model.FunctionId = item.Substring(0, item.Length - arrListStr[arrListStr.Length - 1].Length - 1);
+
+                db.Permissions.Add(model);
+            }
+            Notification.set_flash("Cập nhật quyền thành công!", "success");
+            db.SaveChanges();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

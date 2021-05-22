@@ -54,8 +54,8 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Bảng danh sách quyền thác thác của hệ thống</h3>
-                    <button type="button" onclick="savePermission()" style="margin-right:10px;position:absolute;right:0" class="btn btn-success"><i class="fa fa-fw fa-plus"></i>Lưu lại</button>
-                    <select name="roleId" class="form-control" onchange="loadPermission(this)" style="position:absolute;right:100px;top:10px;width:190px">
+                    <button type="button" onclick="savePermission()" id="saveBTN" style="margin-right:10px;position:absolute;right:0" class="btn btn-success"><i class="fa fa-fw fa-plus"></i>Lưu lại</button>
+                    <select name="roleId" class="form-control" onclick="loadPermission(this)" style="position:absolute;right:100px;top:10px;width:190px">
                         <option value="0">Nhóm quyền</option>
                         <option value="1">Trưởng khoa</option>
                         <option value="2">Phó khoa</option>
@@ -79,39 +79,43 @@
                                 <tr>
                                     <td>@item.Name</td>
                                     <td class="row">
+                                        <div class="col-md-12">
+                                            <input class="isValue" onclick="checkedBox(this)" id="@item.FunctionId" data-value="@item.FunctionId VIEW" type="checkbox">
+                                            <span class="text-bold text-danger">@item.Name (truy cập)</span>
+                                        </div>
                                         @foreach (var sub in item.Childrens)
                                         {
-                                            <div class="col-md-3">
+                                            <div class="col-md-3" style="margin-left:20px">
                                                 <div>
                                                     <span class="text-bold">@sub.Name</span>
                                                 </div>
                                                 <ul style="padding-left:12px">
                                                     <li style="list-style:none">
-                                                        <input class="isValue" data-value="@sub.FunctionId CREATE" type="checkbox" >
+                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId CREATE" type="checkbox" >
                                                         <span>Thêm mới</span>
                                                     </li>
                                                     <li style="list-style:none">
-                                                        <input class="isValue" data-value="@sub.FunctionId UPDATE" type="checkbox">
+                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId UPDATE" type="checkbox">
                                                         <span>Chỉnh sửa</span>
                                                     </li>
                                                     <li style="list-style:none">
-                                                        <input class="isValue" data-value="@sub.FunctionId DELETE" type="checkbox">
+                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId DELETE" type="checkbox">
                                                         <span>Xóa bỏ</span>
                                                     </li>
                                                     <li style="list-style:none">
-                                                        <input class="isValue" data-value="@sub.FunctionId VIEW" type="checkbox">
+                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId VIEW" type="checkbox">
                                                         <span>Truy cập</span>
                                                     </li>
                                                     <li style="list-style:none">
-                                                        <input class="isValue" data-value="@sub.FunctionId APPROVE" type="checkbox">
+                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId APPROVE" type="checkbox">
                                                         <span>Duyệt bài</span>
                                                     </li>
                                                     <li style="list-style:none">
-                                                        <input class="isValue" data-value="@sub.FunctionId IMPORT" type="checkbox">
+                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId IMPORT" type="checkbox">
                                                         <span>Nhập File</span>
                                                     </li>
                                                     <li style="list-style:none">
-                                                        <input class="isValue" data-value="@sub.FunctionId EXPORT" type="checkbox">
+                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId EXPORT" type="checkbox">
                                                         <span>Xuất File</span>
                                                     </li>
                                                 </ul>
@@ -140,8 +144,40 @@
 </section>
 <script>
     var roleId;
+    var temp;
     function loadPermission(xthis) {
+        $('input[type="checkbox"]').each(function () {
+            this.checked = false;
+        });
         roleId = xthis.value;
+        if (roleId == 1) {
+            $('#saveBTN').attr('disabled', 'disabled');
+        }
+        else {
+            $('#saveBTN').removeAttr('disabled');
+        }
+        temp = xthis;
+        $.ajax({
+            type: "POST",
+            url: '/Admin/Permission/GetPermissions',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ roleId: xthis.value }),
+            dataType: "json",
+            success: function (res) {
+                if (res) {
+                    res.forEach(function (item) {
+                        var _permission = item.FunctionId + "_" + item.CommandId;
+                        $('input[type="checkbox"]').each(function () {
+                            var permission = $(this).data("value").replace(' ', '_');
+                            if (permission === _permission) {
+                                this.checked = true;
+                            }
+                        })
+                    })
+                    
+                }
+            }
+        })
     }
     function CheckedCommand (functionId, commandId) {
         for (var i = 0; i < $scope.listPermissons.length; i++) {
@@ -154,11 +190,34 @@
         }
     }
     function savePermission() {
-        jQuery(".isValue").each(function () {
+        var list_permissions = [];
+        $(".isValue").each(function () {
             if ($(this).is(":checked") == true) {
-                console.log($(this).data("value").replace(' ', '_'));
+                list_permissions.push($(this).data("value").replace(' ', '_'));
+            }
+        })
+        $.ajax({
+            type: "POST",
+            url: '/Admin/Permission/SavePermission',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ roleId: roleId, listPermissions: list_permissions }),
+            dataType: "json",
+            success: function (res) {
+                location.reload();
             }
         })
     }
+    function checkedBox(xthis) {
+        if (xthis.checked) {
+            $('input[name="' + xthis.id + '"]').each(function () {
+                this.checked = true;
+            });
+        } else {
+            $('input[name="' + xthis.id + '"]').each(function () {
+                this.checked = false;
+            });
+        }
+    }
+    
 </script>
 
