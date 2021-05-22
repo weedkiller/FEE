@@ -81,7 +81,7 @@
                                     <td class="row">
                                         <div class="col-md-12">
                                             <input class="isValue" onclick="checkedBox(this)" id="@item.FunctionId" data-value="@item.FunctionId VIEW" type="checkbox">
-                                            <span class="text-bold text-danger">@item.Name (truy cập)</span>
+                                            <span class="text-bold" style="color:red">@item.Name (truy cập)</span>
                                         </div>
                                         @foreach (var sub in item.Childrens)
                                         {
@@ -90,34 +90,55 @@
                                                     <span class="text-bold">@sub.Name</span>
                                                 </div>
                                                 <ul style="padding-left:12px">
-                                                    <li style="list-style:none">
-                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId CREATE" type="checkbox" >
-                                                        <span>Thêm mới</span>
-                                                    </li>
-                                                    <li style="list-style:none">
-                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId UPDATE" type="checkbox">
-                                                        <span>Chỉnh sửa</span>
-                                                    </li>
-                                                    <li style="list-style:none">
-                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId DELETE" type="checkbox">
-                                                        <span>Xóa bỏ</span>
-                                                    </li>
-                                                    <li style="list-style:none">
-                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId VIEW" type="checkbox">
-                                                        <span>Truy cập</span>
-                                                    </li>
-                                                    <li style="list-style:none">
+                                                    @if (sub.HasCreate == true)
+                                                    {
+                                                        <li style="list-style:none">
+                                                            <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId CREATE" type="checkbox">
+                                                            <span>Thêm mới</span>
+                                                        </li>
+                                                     }
+                                                    @if (sub.HasUpdate == true)
+                                                    {
+                                                        <li style="list-style:none">
+                                                            <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId UPDATE" type="checkbox">
+                                                            <span>Chỉnh sửa</span>
+                                                        </li>
+                                                     }
+                                                    @if (sub.HasDelete == true)
+                                                    {
+                                                        <li style="list-style:none">
+                                                            <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId DELETE" type="checkbox">
+                                                            <span>Xóa bỏ</span>
+                                                        </li>
+                                                    }
+                                                    @if(sub.HasView == true)
+                                                    {
+                                                        <li style="list-style:none">
+                                                            <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId VIEW" type="checkbox">
+                                                            <span>Truy cập</span>
+                                                        </li>
+                                                    }
+                                                    @if(sub.HasApprove == true)
+                                                    {
+                                                        <li style="list-style:none">
                                                         <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId APPROVE" type="checkbox">
-                                                        <span>Duyệt bài</span>
+                                                        <span>Duyệt tài khoản</span>
                                                     </li>
-                                                    <li style="list-style:none">
-                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId IMPORT" type="checkbox">
-                                                        <span>Nhập File</span>
+                                                    }    
+                                                    @if(sub.HasReply == true)
+                                                    {
+                                                        <li style="list-style:none">
+                                                            <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId REPLY" type="checkbox">
+                                                            <span>Trả lời</span>
+                                                        </li>
+                                                    }
+                                                    @if(sub.HasTrash == true)
+                                                    {
+                                                        <li style="list-style:none">
+                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId TRASH" type="checkbox">
+                                                        <span>Thùng rác</span>
                                                     </li>
-                                                    <li style="list-style:none">
-                                                        <input class="isValue" name="@item.FunctionId" data-value="@sub.FunctionId EXPORT" type="checkbox">
-                                                        <span>Xuất File</span>
-                                                    </li>
+                                                    }
                                                 </ul>
                                             </div>
                                         }
@@ -164,7 +185,7 @@
             data: JSON.stringify({ roleId: xthis.value }),
             dataType: "json",
             success: function (res) {
-                if (res) {
+                if (res == true) {
                     res.forEach(function (item) {
                         var _permission = item.FunctionId + "_" + item.CommandId;
                         $('input[type="checkbox"]').each(function () {
@@ -174,7 +195,10 @@
                             }
                         })
                     })
-                    
+
+                }
+                else {
+                    return;
                 }
             }
         })

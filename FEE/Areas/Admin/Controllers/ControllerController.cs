@@ -8,7 +8,6 @@ namespace FEE.Areas.Admin.Controllers
 {
     public class ControllerController : Controller
     {
-        // GET: Admin/Controller
         public ActionResult Index()
         {
             return View();

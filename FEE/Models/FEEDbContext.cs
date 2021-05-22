@@ -17,7 +17,7 @@ namespace FEE.Models
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Slide> Slides { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         public DbSet<Function> Functions { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Command> Commands { get; set; }

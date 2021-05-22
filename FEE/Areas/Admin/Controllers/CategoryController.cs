@@ -75,10 +75,10 @@ namespace FEE.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        public JsonResult Delete(int id)
+        public JsonResult Delete(int id, bool status)
         {
             var model = _db.Categories.Where(x => x.CategoryId == id).SingleOrDefault();
-            _db.Categories.Remove(model);
+            model.Status = status;
             _db.SaveChanges();
             Notification.set_flash("Xóa thành công!", "success");
             return Json(true, JsonRequestBehavior.AllowGet);

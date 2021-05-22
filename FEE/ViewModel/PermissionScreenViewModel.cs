@@ -15,8 +15,8 @@ namespace FEE.ViewModel
         public bool HasDelete { get; set; }
         public bool HasView { get; set; }
         public bool HasApprove { get; set; }
-        public bool HasExport { get; set; }
-        public bool HasImport { get; set; }
+        public bool HasReply { get; set; }
+        public bool HasTrash { get; set; }
         public List<PermissionScreenViewModel> Childrens { get; set; } = new List<PermissionScreenViewModel>();
     }
 }

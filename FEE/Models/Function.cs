@@ -23,6 +23,5 @@ namespace FEE.Models
         [Column(TypeName = "NVARCHAR")]
         [StringLength(128)]
         public string ParentId { get; set; }
-        public string Icons { get; set; }
     }
 }

@@ -245,11 +245,19 @@
     <Compile Include="Migrations\202105211715073_done-db.designer.cs">
       <DependentUpon>202105211715073_done-db.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105221712482_done-db-part-2.cs" />
+    <Compile Include="Migrations\202105221712482_done-db-part-2.designer.cs">
+      <DependentUpon>202105221712482_done-db-part-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105221716505_update-function.cs" />
+    <Compile Include="Migrations\202105221716505_update-function.designer.cs">
+      <DependentUpon>202105221716505_update-function.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Command.cs" />
     <Compile Include="Models\CommandInFunction.cs" />
-    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\FEEDbContext.cs" />
     <Compile Include="Models\Function.cs" />
@@ -8725,6 +8733,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105211715073_done-db.resx">
       <DependentUpon>202105211715073_done-db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105221712482_done-db-part-2.resx">
+      <DependentUpon>202105221712482_done-db-part-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105221716505_update-function.resx">
+      <DependentUpon>202105221716505_update-function.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

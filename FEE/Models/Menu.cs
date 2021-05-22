@@ -20,7 +20,6 @@ namespace FEE.Models
         public int? DisplayOrder { get; set; }
         public bool Status { get; set; }
         public int? ParentId { get; set; }
-        public int? PostId { get; set; }
         [Column(TypeName = "DateTime")]
         public DateTime CreateDate { get; set; }
         [Column(TypeName = "DateTime")]

@@ -24,8 +24,8 @@ namespace FEE.Areas.Admin.Controllers
 		                        sum((case when c.CommandId = 'UPDATE' then 1 else 0 end)) as HasUpdate,
 		                        sum((case when c.CommandId = 'DELETE' then 1 else 0 end)) as HasDelete,
 		                        sum((case when c.CommandId = 'APPROVE' then 1 else 0 end)) as HasApprove,
-                                sum((case when c.CommandId = 'IMPORT' then 1 else 0 end)) as HasImport,
-                                sum((case when c.CommandId = 'EXPORT' then 1 else 0 end)) as HasExport
+                                sum((case when c.CommandId = 'REPLY' then 1 else 0 end)) as HasReply,
+                                sum((case when c.CommandId = 'TRASH' then 1 else 0 end)) as HasTrash
 	                    from Functions as f inner join CommandInFunctions as cif on f.FunctionId = cif.FunctionId 
 			                    inner join Commands as c on cif.CommandId = c.CommandId
 			                    group by f.FunctionId,f.Name,f.ParentId order by f.ParentId";
@@ -84,23 +84,31 @@ namespace FEE.Areas.Admin.Controllers
         }
         public JsonResult SavePermission(int roleId, List<string> listPermissions)
         {
-            foreach(var item in db.Permissions.Where(x=>x.RoleId == roleId).ToList())
-            {                
-                db.Permissions.Remove(item);
-            }
-            foreach(var item in listPermissions.Distinct())
+            if(roleId == 0)
             {
-                string[] arrListStr = item.Split('_');
-                var model = new Permission();
-                model.RoleId = roleId;
-                model.CommandId = arrListStr[arrListStr.Length-1];
-                model.FunctionId = item.Substring(0, item.Length - arrListStr[arrListStr.Length - 1].Length - 1);
-
-                db.Permissions.Add(model);
+                Notification.set_flash("Vui lòng chọn nhóm quyền!", "warning");
+                return Json(false, JsonRequestBehavior.AllowGet);
             }
-            Notification.set_flash("Cập nhật quyền thành công!", "success");
-            db.SaveChanges();
-            return Json(true, JsonRequestBehavior.AllowGet);
+            else
+            {
+                foreach (var item in db.Permissions.Where(x => x.RoleId == roleId).ToList())
+                {
+                    db.Permissions.Remove(item);
+                }
+                foreach (var item in listPermissions.Distinct())
+                {
+                    string[] arrListStr = item.Split('_');
+                    var model = new Permission();
+                    model.RoleId = roleId;
+                    model.CommandId = arrListStr[arrListStr.Length - 1];
+                    model.FunctionId = item.Substring(0, item.Length - arrListStr[arrListStr.Length - 1].Length - 1);
+
+                    db.Permissions.Add(model);
+                }
+                Notification.set_flash("Cập nhật quyền thành công!", "success");
+                db.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

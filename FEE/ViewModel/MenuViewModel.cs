@@ -14,7 +14,7 @@ namespace FEE.ViewModel
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
         public string URL { get; set; }
-        public int? PostId { get; set; }
+
         [Required(ErrorMessage = "Chưa chọn thứ tự")]
         public int? DisplayOrder { get; set; }
         public bool Status { get; set; }

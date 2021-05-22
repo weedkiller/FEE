@@ -44,7 +44,6 @@ namespace FEE.Areas.Admin.Controllers
                             Url = f.Url,
                             ParentId = f.ParentId,
                             SortOrder = f.SortOrder,
-                            Icons = f.Icons
                         };
             var data = query.Distinct()
                 .OrderBy(x => x.ParentId)
